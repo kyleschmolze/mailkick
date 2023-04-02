@@ -2,6 +2,8 @@ module Mailkick
   class Engine < ::Rails::Engine
     isolate_namespace Mailkick
 
+    require_relative '../../app/helpers/mailkick/url_helper'
+
     initializer "mailkick" do |app|
       Mailkick.discover_services unless Mailkick.services.any?
       secrets = app.respond_to?(:secrets) ? app.secrets : app.config
